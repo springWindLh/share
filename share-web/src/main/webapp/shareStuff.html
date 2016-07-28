@@ -1,0 +1,54 @@
+<div class="col-sm-3"
+	style="background-image: url(sources/img/system/shareStuff.jpg);background-size:100% 100%; background-repeat:no-repeat; height:100%;position: fixed;">
+	<div class="bottom_block">
+		<p class="bold size40">即刻分享</p>
+		<p class="size26 bold500">放飞一个气球，分享一道风景</p>
+	</div>
+</div>
+<div class="col-sm-9 col-sm-offset-3 maxWidth500">
+	<h4 style="color:#0099CC;">分享有限的资源，收获无限的快乐！</h4>
+	<form name="shareForm" ng-submit="save();">
+		<div class="form-group">
+			<select required="required" class="form-control"
+				style="height:50px; font-size: 20px;" ng-model="newStuff.type"
+				ng-options="type.name for type in types">
+				<option value="">请选择资源类型</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select required="required" class="form-control"
+				ng-model="newStuff.free" style="height:50px; font-size: 20px;"
+				ng-options="type.value as type.name for type in shareTypes">
+				<option value="">请选择分享类型</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<span ng-show="newStuff.free==false">&nbsp;价格：<input
+				class="form--control maxWidth100" type="number"
+				style="height:30px; font-size: 20px;" ng-model="newStuff.price"
+				min="0" max="999999"></span>
+		</div>
+		<div class="form-group">
+			<input class="form-control" placeholder="资源标题" style="height:50px; font-size: 20px;" required="required" ng-model="newStuff.title">
+		</div>
+		<div class="form-group">
+			<textarea class="form-control" placeholder="简要描述(500字以内)" rows="5" style="font-size: 15px;"
+				maxlength="500" ng-model="newStuff.description"></textarea>
+		</div>
+		<div class="form-group">
+			<label class="pull-left">资源图片：</label> <input type="file"
+				class="pull-left" ng-file-select="onFileSelect($files)"
+				multiple="multiple" accept="image/*">
+			<!-- 						<div ng-file-drop="onFileSelect($files)" -->
+			<!-- 							ng-file-drag-over-class="optional-css-class-name-or-function" -->
+			<!-- 							ng-show="dropSupported">drop files here</div> -->
+			<!-- 						<div ng-file-drop-available="dropSupported=true" -->
+			<!-- 							ng-show="!dropSupported">HTML5 Drop File is not supported!</div> -->
+			<!-- 						<button class="button button-pill" ng-click="upload.abort()">取消</button> -->
+			<label style="color:green;">{{progress}}</label> <br>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="button button-pill button-primary margin-top10 width150">分享</button>
+		</div>
+	</form>
+</div>

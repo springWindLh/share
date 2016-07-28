@@ -1,0 +1,67 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-label="Close"
+					ng-click="$hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<p class="modal-title pull-left size20">学校选择</p>
+				<span class="margin-left10 pull-left"><input type="radio"
+					class="pointer" name="schooltype_ra" checked="checked"
+					ng-click="setSchooltype('');">&nbsp;全部</span> <span
+					class="margin-left10 pull-left"><input type="radio"
+					class="pointer" name="schooltype_ra"
+					ng-click="setSchooltype('普通本科');">&nbsp;普通本科</span> <span
+					class="margin-left10 pull-left"><input type="radio"
+					class="pointer" name="schooltype_ra"
+					ng-click="setSchooltype('独立学院');">&nbsp;独立学院</span> <input
+					ng-show="schoolVisble"
+					class="form-control pull-right width200 margin-right20"
+					ng-model="searchKey" placeholder="搜索学校名称">
+				<div class="clearfix"></div>
+			</div>
+			<form>
+				<div class="modal-body">
+					<div ng-show="schoolVisble">
+						<div class="clearfix center">
+							<p class="size30">{{schoolname}}</p>
+						</div>
+						<h3 ng-show="!provinceVisble" class="pull-right margin-right20"
+							style="position: absolute; top: 30px; right: 10px;">
+							<i class="fa fa-long-arrow-left pointer" ng-click="back();"></i>
+						</h3>
+						<hr>
+					</div>
+					<div ng-show="provinceVisble" class="clearfix">
+						<li class="pull-left margin10 listNoneStyle"
+							ng-repeat="p in provinces" ng-click="findSchools(p,currentSchooltype)"><a
+							href="" style="color: black;">{{p}}</a></li>
+					</div>
+					<div ng-show="schoolVisble"
+						style="max-height: 300px; overflow-y: scroll;">
+						<li
+							class="pull-left margin-left10 margin-right10 margin-top10 listNoneStyle width150"
+							ng-repeat="s in schools|filter:{province:currentProvince,schoolname:searchKey,schooltype:currentSchooltype}"><a
+							href="" style="color: black;"
+							ng-click="selectSchool(s.schoolname,s.schoolid);">{{s.schoolname}}</a></li>
+					</div>
+				</div>
+				<div ng-show="schoolVisble" class="modal-footer">
+					<div ng-if="!reloadVisble" class="center">
+						<button type="button" class="button button-border width150"
+							ng-click="updateSchoolInfo()">确认</button>
+					</div>
+					<div ng-if="reloadVisble">
+						<button type="button"
+							class="button button-border width150 pull-left"
+							ng-click="updateSchoolInfoAndReload()">确认</button>
+						<button type="button"
+							class="button button-border width150 pull-right "
+							ng-if="reloadVisble" ng-click="seeAllSchoolInfo()">查看所有</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,62 @@
+<div class="col-sm-3"
+	style="background-image: url(sources/img/system/exchangeStuffList.jpg);background-size:100% 100%; background-repeat:no-repeat; height:100%;position: fixed;">
+	<div class="bottom_block">
+		<p class="bold size40">交换</p>
+		<p class="size26 bold500">交换资源，共同受益</p>
+		<button class="button button-action" ng-click="exchangeStuffModal();">我要交换</button>
+	</div>
+</div>
+<div class="col-sm-offset-3 col-sm-9">
+	<div class="col-sm-2" style="position: fixed; right:50px;z-index: 1;">
+		<button type="button" class="btn btn-default pull-left"
+			ng-model="selectedState"
+			ng-options="s.id as s.value for s in statess" bs-select>
+			Action <span class="caret"></span>
+		</button>
+		<div class="input-group">
+			<input class="form-control" ng-model="searchKey" placeholder="搜索标题">
+			<div class="input-group-addon pointer" ng-click="search();">
+				<i class="fa fa-search"></i>
+			</div>
+		</div>
+		<a href="" ng-show="clearTextVisible" ng-click="clearKeyWords();">清楚搜索条件</a>
+	</div>
+	<div id="exStuffsEmptyShow" class="size20 margin-top50 margin-bottom20 margin-left50" style="display: none;"><i class="fa fa-globe margin-right10"></i>哇喔，这里居然还是一片未开垦的领土<br><br>
+<i class="fa fa-child margin-right10"></i>赶快注册成为{{currentSchoolname}}交换区的第一位开辟者<br><br><i class="fa fa-tint margin-right10"></i>交换你的第一份资源，品偿分享源泉的甘甜</div>
+	<div class="margin-left20 col-sm-9"
+		ng-repeat="es in exchangeStuffs |filter:{'completed':globalCompleted} track by es.id ">
+		<a ui-sref="exchangeStuff({id:es.id})" target="_blank">
+			<div class="pull-left">
+				<image-show class="width150 height150"
+					imgurl="{{es.attachments[0].path}}" imgtype="stuff"
+					defaultimageurl="{{baseSystemImgUrl}}default_stuffImg.jpg">
+				</image-show>
+			</div>
+		</a>
+		<div class="pull-left margin-left10 col-sm-8 stuff">
+			<div class="height40">
+				<a target="_blank" ui-sref="exchangeStuff({id:es.id})"> <strong
+					class="size26">{{es.title|lengthFilter:14}}</strong></a>
+				<image-show
+					class="headImg pull-right width40 height40 borderRadius50"
+					imgurl="{{es.user.headImg.path}}" imgtype="headImg"
+					defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg"
+					data-title="{{es.user.name}}" data-placement="bottom" bs-tooltip>
+				</image-show>
+
+			</div>
+			<a target="_blank" ui-sref="exchangeStuff({id:es.id})"><p
+					class="height100">{{es.description}}</p></a>
+					<div class="height20" style="margin-top: 21px;color:#939292;">
+				<span class="pull-left">{{es.createTime|dateFilter}}</span>
+				<span ng-if="!currentUserId>0"
+					class="margin-left20 pull-left">{{es.school.schoolname}}</span>
+				</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<hr>
+	</div>
+	<button class="button button-pill col-sm-5"
+		ng-if="exchangeStuffs.length>=20" ng-click="showMore();">查看更多</button>
+</div>

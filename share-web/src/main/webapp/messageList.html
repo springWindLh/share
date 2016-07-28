@@ -1,0 +1,94 @@
+<style type="text/css">
+.img_div img {
+	width: 80px;
+	height: 80px;
+	border-radius: 80px;
+	margin: 10px;
+}
+
+.img_div {
+	float: left;
+}
+
+.popover {
+	display: block;
+	position: relative;
+	float: left;
+	margin: 10px;
+	min-width: 280px;
+	max-width: 400px;
+	z-index: auto;
+}
+
+.item {
+	border-bottom: 1px dashed #ccc;
+}
+
+.tab-content {
+	min-width: 600px;
+}
+
+.replyBtn {
+	margin-left: 20px;
+	cursor: pointer;
+	color: #996666;
+}
+
+.removeBtn {
+	cursor: pointer;
+	color: #996666;
+}
+
+.time {
+	margin: auto 10px;
+}
+</style>
+<ul class="nav nav-tabs" role="tablist">
+	<li class="active"><a href="#received" role="tab"
+		data-toggle="tab">已收到私信</a></li>
+	<li><a href="#sended" role="tab" data-toggle="tab">已发送私信</a></li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane active" id="received">
+	<p class="margin20" ng-if="acceptMsgs.length==0">没有相关记录</p>
+		<div class="item" ng-repeat="accept_msg in acceptMsgs">
+			<div class="img_div">
+				<image-show class="borderRadius50 width80 height80" imgurl="{{accept_msg.sender.headImg.path}}" imgtype="headImg" defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg"></image-show>
+			</div>
+			<div class="popover right">
+				<div class="arrow"></div>
+				<div class="popover-title">
+					<strong>发送者：<span id="name">{{accept_msg.sender.name}}</span></strong>
+					<span title="回复" class="replyBtn fa fa-comment" ng-click="messageModal(accept_msg.sender.name,accept_msg.sender);"></span>
+					<span class="time">{{accept_msg.createTime|dateFilter}}</span> <span
+						title="删除" class="removeBtn fa fa-remove" ng-click="deleteMessage(accept_msg.id,$index,'accept');"></span>
+				</div>
+				<div class="popover-content">
+					<p>{{accept_msg.content}}</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<div class="tab-pane" id="sended">
+	<p class="margin20" ng-if="sendMsgs.length==0">没有相关记录</p>
+		<div class="item" ng-repeat="send_msg in sendMsgs">
+			<div class="img_div">
+				<image-show class="borderRadius50 width80 height80" imgurl="{{send_msg.accepter.headImg.path}}" imgtype="headImg" defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg"></image-show>		
+			</div>
+			<div class="popover right">
+				<div class="arrow"></div>
+				<div class="popover-title">
+					<strong>接收者：<span id="name">{{send_msg.accepter.name}}</span></strong>
+					<span title="回复" class="replyBtn fa fa-comment" ng-click="messageModal(send_msg.accepter.name,send_msg.accepter);"></span>
+					<span class="time">{{send_msg.createTime|dateFilter}}</span> <span title="删除"
+						class="removeBtn fa fa-remove" ng-click="deleteMessage(send_msg.id,$index,'send');"></span>
+				</div>
+				<div class="popover-content">
+					<p>{{send_msg.content}}</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>

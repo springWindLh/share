@@ -1,0 +1,31 @@
+angular.module("shareApp")
+.controller("userDetail_controller",function($rootScope,$scope,$stateParams,$http,userService,stuffService){
+	$scope.currentStuffPage=1;
+	$scope.stuffs=[];
+	$scope.getStuffs=function(){
+		if($scope.count==0||$scope.count<=20){
+			alert("没有更多了！");
+			return;
+		}
+		stuffService.query({
+			_page:$scope.currentStuffPage,
+			_count:20,
+			_operator:'=',
+			_query:'user.id,'+$scope.user.id+',completed,false'
+			},function(response){
+				$scope.stuffs=$scope.stuffs.concat(response.stuffs);
+				$scope.count=response.stuffs.length;
+				$scope.total=response._total;
+			});
+	};
+	
+	userService.get({id:$stateParams.id},function(response){
+		$scope.user=response.json;
+		$scope.getStuffs();
+	});
+	
+	$scope.showMore=function(){
+		$scope.currentStuffPage+=1;
+		$scope.getStuffs();
+	};
+});

@@ -1,0 +1,24 @@
+
+<div id="content-header">
+	<h1>用户管理</h1>
+</div>
+<div id="breadcrumb">
+	<a ui-sref="share_admin({uri:'dashboard'})" title="Go to Home"
+		class="tip-bottom"><i class="icon-home"></i>首页</a> <a class="current">学校信息导入</a>
+</div>
+<div class="margin20 col-sm-12">
+	<div class="tab-content margin10">
+		<label>请选择导入的文件（内容为json数组格式）</label><br> <input type="file"
+			class="pull-left" ng-file-select="onFileSelect($files)"
+			 accept="text/*">
+	</div>
+	<div ng-show="progressVisble" style="border-top:2px groove white;border-bottom:2px groove white;padding: 10px;width:200px;">
+		<p>导入进度：<em class="text-info">{{progressMsg}}</em></p>
+	<div ng-show="initFlag">
+		<p>导入数量：<em class="text-info">{{count}}</em></p>
+		<p>导入状态：<em ng-show="state" class="text-success">{{resultState}}</em>
+		<em ng-show="!state" class="text-danger">{{resultState}}</em></p>
+		<p class="text-danger">{{errorMsg}}</p>
+	</div>
+	</div>
+</div>

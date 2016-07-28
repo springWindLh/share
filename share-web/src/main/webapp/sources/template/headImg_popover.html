@@ -1,0 +1,14 @@
+<div class="popover">
+	<div class="arrow"></div>
+	<div style="text-align:center;">
+		<h3 class="popover-title" ng-bind="title" ng-show="title"></h3>
+	</div>
+	<div class="popover-content">
+		<ul style="list-style: circle; margin-left: -30px;">
+			<li ng-repeat="stuff in userStuffs">{{stuff.title}}</li>
+			</ul>
+			<hr>
+		<p class="colorGray">tel:<span class="focus_info">{{stuff.user.phone}}</span></p>
+		<p class="colorGray">共分享了&nbsp;<span class="focus_num">{{total}}</span>&nbsp;个资源</p>
+	</div>
+</div>

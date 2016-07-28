@@ -1,0 +1,85 @@
+<div class="width700 toCenter">
+	<h2>{{exchangeStuff.title}}</h2>
+	<p>
+	<a ui-sref="user({id:exchangeStuff.user.id})" target="_blank">
+		<image-show class="width40 height40 borderRadius50" imgtype="headImg"
+			imgurl="{{exchangeStuff.user.headImg.path}}"
+			defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg">
+		</image-show></a>
+		<small><span class="margin-left10">时间：{{exchangeStuff.createTime|dateFilter}}</span><span
+			class="margin-left20">作者：{{exchangeStuff.user.name}}</span><span
+			class="margin-left20">tel：</span></small>{{exchangeStuff.user.phone}} <small><span
+			class="margin-left20">状态：</span></small><span> <strong
+			ng-if="exchangeStuff.completed" class="text-danger">交换结束</strong> <strong
+			ng-if="!exchangeStuff.completed" class="text-success">交换中...</strong>
+		</span>
+		<button class="margin-left20 button button-royal button-small" ng-if="exchangeStuff.user.id!=currentUserId"
+			ng-click="messageModal();">
+			发信息给<span ng-if="exchangeStuff.user.sex=='男'">他</span><span
+				ng-if="exchangeStuff.user.sex=='女'">她</span>
+		</button>
+	</p>
+	<p ng-if="exchangeStuff.expectation!=null&&exchangeStuff.expectation!=''"><span class="colorGray">期待的交换目标：</span><b style="color:#993333;">{{exchangeStuff.expectation}}</b></p>
+	<p>{{exchangeStuff.description}}</p>
+	<a ng-repeat="attachment in exchangeStuff.attachments" class="fancybox"
+		data-fancybox-group="gallery"
+		ng-href="{{baseAttachmentImgUrl}}{{attachment.path}}"><img
+		class="imgBorder" ng-src="{{baseAttachmentImgUrl}}{{attachment.path}}"></a>
+
+	<div class="center">
+		<br>
+		<button class="button button-primary button-pill" ng-if="!exchangeStuff.completed&&!currentUserId>0"
+			ng-click="showLoginModal();">我想交换</button>
+		<button class="button button-primary button-pill" ng-if="!exchangeStuff.completed&&currentUserId>0"
+			ng-click="exchangeStuffModal();">我想交换</button>
+	</div>
+	<br>
+	<div style="border-left: 1px solid gray; padding:0 20px 0 20px;margin-left: 60px;">
+	<div class="clearfix margin-top50"
+		ng-repeat="es in exchangeStuffReplys track by es.id">
+		<div class="pull-left">
+		<a ng-repeat="attachment in es.attachments track by attachment.id" class="fancybox"
+		data-fancybox-group="gallery{{es.id}}"
+		ng-href="{{baseAttachmentImgUrl}}{{attachment.path}}">
+			<img ng-if="$index==0" ng-src="{{baseAttachmentImgUrl}}{{attachment.path}}"
+				class="width150 height150 borderRadius50 shadow" style="margin-left: -98px;">
+				</a>
+		</div>
+		<div class="pull-left width120"><hr style="margin-top:51px;"></div>
+		<div class="pull-left">
+			<div class="panel panel-default maxWidth400">
+				<div class="panel-heading" style="padding: 5px 15px 5px 15px;">
+				<span class="panel-title">
+						<strong>{{es.title}}</strong>
+						 <span class="margin-left10"><strong>{{es.user.name}}</strong></span>
+							</span>
+						<image-show class="width40 height40 borderRadius50 margin-left10" imgtype="headImg"
+							imgurl="{{es.user.headImg.path}}"
+							defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg">
+						</image-show>
+				</div>
+				<div class="panel-body" style="padding: 5px 15px 5px 15px;">
+					<p>{{es.description}}</p>
+					<p><span class="size12 colorGray">{{es.createTime|dateFilter}}</span><span ng-if="exchangeStuff.user.id==currentUserId" data-title="成交" data-placement="bottom" bs-tooltip><i class="fa fa-gavel margin-left10 pointer" ng-click="dealComplete(es);"></i></span>
+					<i ng-if="es.user.id==currentUserId" class="fa fa-remove margin-left10 pointer" ng-click="deleteExchangeStuff(es.id,$index);"
+					title="删除"></i>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$(".fancybox").fancybox({
+			helpers : {
+				thumbs : {
+					width : 20,
+					height : 20
+				}
+			}
+		});
+		
+	});
+</script>

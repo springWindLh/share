@@ -1,0 +1,171 @@
+html, body {
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+	font-family: "lucida grande", "lucida sans unicode", lucida, helvetica,
+		"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei",
+		sans-serif;
+	overflow-x: hidden;
+}
+
+.menu_div {
+	height: 100%;
+	width: 16.66%;
+	background-color: #2a2a2a;
+	font-size: 16px;
+	padding: 0;
+	z-index: 999;
+	left: 0;
+	top: 0;
+	position: fixed;
+}
+
+.top_menu a:link, .top_menu a:visited {
+	color: #999999;
+	text-shadow: 0 1px 0 black;
+}
+
+.top_menu a:hover, .top_menu a:active {
+	color: #ffffff;
+	text-decoration: none;
+	background-color: #e78170;
+	text-shadow: 0 1px 0 #de533a;
+	box-shadow: inset 0 0 10px #9e3924;
+}
+
+.selected span {
+	color: #ffffff;
+}
+
+.selected {
+	color: #ffffff;
+	text-decoration: none;
+	background-color: #e78170;
+	text-shadow: 0 1px 0 #de533a;
+	box-shadow: inset 0 0 10px #9e3924;
+}
+
+.top_menu a {
+	display: block;
+	line-height: 40px;
+	padding-left: 5px;
+}
+
+.bottom_menu {
+	position: absolute;
+	bottom: 50px;
+}
+
+.bottom_menu a {
+	display: block;
+	line-height: 30px;
+	padding-left: 5px;
+}
+
+.bottom_menu a:link, .bottom_menu a:visited {
+	color: #999999;;
+	text-shadow: 0 1px 0 black;
+}
+
+.bottom_menu a:hover, .bottom_menu a:active {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.cover_img {
+	padding: 0;
+	border: solid 1px red;
+	height: 100%;
+}
+
+.input-group-addon {
+	min-width: 40px;
+}
+
+a:focus {
+	outline: none;
+	text-decoration: none;
+}
+
+#alert_div {
+	position: fixed;
+	top: 10px;
+	left: 10%;
+	z-index: 100;
+	width: 80%;
+	text-align: center;
+}
+
+.stuff a:link, .stuff a:visited, .stuff a:hover, .stuff a:active {
+	color: black;
+	text-decoration: none;
+}
+
+.bottom_block {
+	position: absolute;
+	bottom: 50px;
+	color: white;
+	text-shadow: -1px 0 0 rgba(0, 0, 0, 0.75);
+	margin-left: 20px;
+	margin-left: 20px;
+}
+
+.headerLeft thead th {
+	text-align: left;
+}
+
+.colorGray {
+	color: gray;
+}
+
+.bgGray {
+	background-color: #ddd;
+}
+
+.focus_info {
+	color: #408080;
+	font-size: 16px;
+}
+
+.focus_num {
+	color: #A23400;
+	font-size: 16px;
+}
+
+.grow_div {
+	border-left: 1px solid gray;
+	height: 100px;
+	color: gray;
+	padding: 15px;
+	position: relative;
+	margin-left: 30px;
+}
+
+.grow_div a {
+	text-decoration: none;
+}
+
+.grow_circle {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border-style: double;
+	position: absolute;
+	top: 30px;
+	left: -10px;
+	background-color: white;
+}
+
+.btnSelected {
+	background-color: #ccc;
+}
+
+.schoolname {
+	padding: 15px 15px 15px 20px;
+	border-bottom: 1px inset gray;
+	background:linear-gradient(70deg,#9D5D4D,#060606,#CCC);
+	background:-webkit-linear-gradient(70deg,#9D5D4D,#060606,#CCC);
+	background:-moz-linear-gradient(70deg,#9D5D4D,#060606,#CCC);
+	background:-o-linear-gradient(70deg,#9D5D4D,#060606,#CCC);
+}
+.schoolname a{text-decoration: none;}

@@ -1,0 +1,66 @@
+
+<div class="col-sm-3" style="background-image: url(sources/img/system/shouye.jpg);background-size:100% 100%; background-repeat:no-repeat; height:100%;position: fixed;">	
+<div class="bottom_block">
+<p class="bold size40">分享</p>
+<p class="size26 bold500">分享资源，收获快乐</p>
+</div>
+</div>
+
+
+<div class="col-sm-9 col-sm-offset-3" style="text-align: center;">
+<div class="col-sm-12" style="margin: 40px auto;">
+<img alt="logo" class="col-sm-5 col-sm-offset-2" src="{{baseSystemImgUrl}}logo.png">
+</div>
+	<div class="col-sm-3">
+		<div class="thumbnail">
+			<img src="{{baseSystemImgUrl}}free.jpg"
+				style="width: 200px;height: 200px;">
+			<div class="caption">
+				<h3 style="color: #7DB500;">无偿分享区</h3>
+				<p>这里的资源全是免费分享</p>
+				<p>免费，不是傻，是一种品质</p>
+				<p>分享，是一种快乐</p>
+				<p>
+					<a ui-sref="stuff_list({free:true})" class="button button-pill button-action" role="button">进入</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-sm-3">
+		<div class="thumbnail">
+			<img src="{{baseSystemImgUrl}}notFree.jpg"
+				style="width: 200px;height: 200px;">
+			<div class="caption">
+				<h3 style="color: #00A1CB;">有偿分享区</h3>
+				<p>这里的资源全是付费提供</p>
+				<p>收费，并不能让我们变富</p>
+				<p>但能留住人与物的那份情</p>
+				<p>
+					<a ui-sref="stuff_list({free:false})" class="button button-pill button-primary" role="button">进入</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-sm-3">
+		<div class="thumbnail">
+			<img src="{{baseSystemImgUrl}}jiaohuan.jpg"
+				style="width: 200px;height: 200px;">
+			<div class="caption">
+				<h3 style="color: #F18D05;">资源交换区</h3>
+				<p>这里的资源可能并不贵重</p>
+				<p>但可能正是你所需要的</p>
+				<p>互换资源，传递价值</p>
+				<p>
+					<a ui-sref="share({uri:'exchangeStuffList'})" class="button button-pill button-highlight"
+						role="button">进入</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<br class="clearfix">
+</div>
+

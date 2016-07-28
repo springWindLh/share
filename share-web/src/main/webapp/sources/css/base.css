@@ -1,0 +1,72 @@
+.widthFull{width: 100%;}
+.width20{width:20px;}
+.width30{width:30px;}
+.width40{width:40px;}
+.width50{width:50px;}
+.width80{width:80px;}
+.width100{width: 100px;}
+.width120{width: 120px;}
+.width150{width: 150px;}
+.width200{width: 200px;}
+.width300{width: 300px;}
+.width400{width: 400px;}
+.width500{width: 500px;}
+.width700{width: 700px;}
+.maxWidth100{max-width: 100px;}
+.maxWidth150{max-width: 150px;}
+.maxWidth170{max-width: 170px;}
+.maxWidth200{max-width: 200px;}
+.maxWidth300{max-width: 300px;}
+.maxWidth400{max-width: 400px;}
+.maxWidth500{max-width: 500px;}
+.maxWidth700{max-width: 700px;}
+.maxWidth800{max-width: 800px;}
+.maxWidth1000{max-width: 1000px;}
+.minWidth100{min-width: 100px;}
+.minWidth200{min-width: 200px;}
+.minWidth300{min-width: 300px;}
+.minWidth400{min-width: 400px;}
+.heightFull{height: 100%;}
+.height20{height: 20px;}
+.height30{height: 30px;}
+.height40{height: 40px;}
+.height50{height: 50px;}
+.height80{height: 80px;}
+.height100{height: 100px;}
+.height110{height: 110px;}
+.height150{height: 150px;}
+.height200{height: 200px;}
+.height300{height: 300px;}
+.height500{height: 500px;}
+.minHeight500{min-height: 500px;}
+.maxHeight200{max-height: 200px;}
+.margin10{margin: 10px;}
+.margin20{margin: 20px;}
+.margin30{margin: 30px;}
+.margin-left50{margin-left: 50px;}
+.margin-left20{margin-left: 20px;}
+.margin-left10{margin-left: 10px;}
+.margin-right20{margin-right: 20px;}
+.margin-right10{margin-right: 10px;}
+.margin-top10{margin-top: 10px;}
+.margin-top50{margin-top: 50px;}
+.margin-bottom20{margin-bottom:20px;}
+.listNoneStyle{list-style: none;}
+.size26{font-size: 26px;}
+.size12{font-size: 12px;}
+.size14{font-size: 14px;}
+.size16{font-size: 16px;}
+.borderRadius50{border-radius:50%;}
+.paddingNone{padding:0;}
+.toCenter{margin: 0 auto;}
+.center{text-align: center;}
+.pointer{cursor: pointer;}
+.size40{font-size: 40px;}
+.size30{font-size: 30px;}
+.size20{font-size: 20px;}
+.size22{font-size: 22px;}
+.size12{font-size: 12px;}
+.bold{font-weight: bold;}
+.bold500{font-weight: 500;}
+.imgBorder{box-shadow:2px 2px 5px black;width:200px;height:200px;margin: 10px;}
+.shadow{box-shadow:4px 4px 5px black;}

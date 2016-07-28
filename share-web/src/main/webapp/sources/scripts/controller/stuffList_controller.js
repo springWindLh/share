@@ -1,0 +1,41 @@
+angular.module("shareApp")
+.controller("stuffList_controller",function($rootScope,$scope,$http,stuffService,alertService,$stateParams){
+	$scope.currentStuffPage=1;
+	$scope.stuffs=[];
+	$scope.getStuffs=function(){
+		if($scope.count==0||$scope.count<=20){
+			alert("没有更多了！");
+			return;
+		}
+		stuffService.query({
+			_page:$scope.currentStuffPage,
+			_count:20,
+			free:$stateParams.free,
+			_query:'completed,false'
+		},function(response){
+			$scope.stuffs=$scope.stuffs.concat(response.stuffs);
+			$scope.count=response.stuffs.length;
+			if($scope.stuffs.length==0){
+				$("#stuffsEmptyShow").show();
+			}
+		});
+	};
+	
+	$scope.getStuffs();
+	$scope.getUserStuffs=function(userId){
+		stuffService.query({
+			_count:5,
+			_operator:'=',
+			_query:'user.id,'+userId
+			},function(response){
+				$scope.userStuffs=response.stuffs;
+				$scope.total=response._total;
+			});
+	};
+	
+	$scope.showMore=function(){
+		$scope.currentStuffPage+=1;
+		$scope.getStuffs();
+	};
+	
+});

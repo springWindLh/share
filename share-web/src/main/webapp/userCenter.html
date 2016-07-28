@@ -1,0 +1,104 @@
+
+<div class="col-sm-6 maxWidth500" style="margin:0;">
+	<ul class="nav nav-tabs">
+		<li class="active" role="presentation"><a href="#baseInfo" data-toggle="tab">基本信息</a></li>
+		<li role="presentation"><a href="#changePwd" data-toggle="tab">密码修改</a></li>
+	</ul>
+	<div class="tab-content margin10">
+		<div id="baseInfo" class="tab-pane active">
+			<div class="form-group">
+					<div class="pull-left">
+						<image-show class="borderRadius50 width100 height100" imgurl="{{user.headImg.path}}" imgtype="headImg" defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg">
+					</image-show></div>
+					<div class="pull-left margin10">
+					<p>更新头像</p>
+						<input type="file" ng-file-select="onFileSelect($files)" accept="image/*">				
+<!-- 						<div class="button" ng-file-select="onFileSelect($files)" -->
+<!-- 							data-multiple="true"></div> -->
+<!-- 						<div ng-file-drop="onFileSelect($files)" -->
+<!-- 							ng-file-drag-over-class="optional-css-class-name-or-function" -->
+<!-- 							ng-show="dropSupported">drop files here</div> -->
+<!-- 						<div ng-file-drop-available="dropSupported=true" -->
+<!-- 							ng-show="!dropSupported">HTML5 Drop File is not supported!</div> -->
+<!-- 						<button class="button button-pill" ng-click="upload.abort()">取消</button> -->
+						
+					</div>
+					<div class="clearfix"></div>					
+				</div>
+			<form name="changeUserInfoForm" ng-submit="updateInfo()">		
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span class="fa fa-user"></span>
+						</div>
+						<input type="text" class="form-control" placeholder="用户名"
+							ng-model="user.name" required="required" maxlength="45">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span class="fa fa-envelope"></span>
+						</div>
+						<input type="email" class="form-control" ng-model="user.email"
+							placeholder="e-mail" required="required" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span class="fa fa-mobile-phone fa-lg"></span>
+						</div>
+						<input type="tel" name="tel" class="form-control"
+							ng-model="user.phone" placeholder="手机号" required="required"
+							maxlength="11" />
+					</div>
+				</div>
+				<div class="form-group">
+					<textarea type="tel" name="tel" class="form-control"
+						ng-model="user.signature" placeholder="个性签名" maxlength="200"></textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="button button-pill button-action">更新</button>
+				</div>
+			</form>
+		</div>
+		<div id="changePwd" class="tab-pane">
+			<form name="changePasswordForm" ng-submit="updatePassword()">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span class="fa fa-lock fa-lg"></span>
+						</div>
+						<input type="password" name="password" class="form-control"
+							ng-model="oldPassword" placeholder="原密码" required="required"
+							maxlength="45" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span class="fa fa-lock fa-lg"></span>
+						</div>
+						<input type="password" class="form-control" ng-model="newPassword"
+							placeholder="新密码" required="required" maxlength="45" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span class="fa fa-lock fa-lg"></span>
+						</div>
+						<input type="password" class="form-control"
+							ng-model="newPassword2" placeholder="确认密码" required="required"
+							maxlength="45" />
+
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="button button-pill button-action">更新</button>
+				</div>
+		</div>
+	</div>
+</div>
+</div>

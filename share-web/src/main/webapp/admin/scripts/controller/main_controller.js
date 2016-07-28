@@ -1,0 +1,21 @@
+angular.module("shareApp_admin")
+.controller("main_controller",function($rootScope,$scope,$http,$state,$stateParams,userService,alertService){
+	if($rootScope.currentAdminId==""){
+		window.location.href="admin/login.html";
+	}else{
+		$state.go("share_admin",{uri:'dashboard'});
+	}
+	$scope.exit=function(){
+		$http.post("admin_login_out.json").success(function(response){
+			if(response.success){			
+				location.reload();
+		}
+		});
+	};
+	
+	$http.get('school/seeAll').success(function(response){
+		if(response.success){
+			localStorage.clear();
+		}
+	});
+});

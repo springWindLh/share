@@ -1,0 +1,62 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-label="Close"
+					ng-click="$hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h3 class="modal-title">
+					<i class="fa fa-edit"></i>交换资源
+				</h3>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs">
+					<li class="active" role="presentation"><a href="#newEs"
+						data-toggle="tab">新建</a></li>
+					<li role="presentation"><a href="#chooseEs" data-toggle="tab">选择已有</a></li>
+				</ul>
+				<div class="tab-content margin10">
+					<div id="newEs" class="tab-pane active">
+						<form name="exchangeStuffForm"
+							ng-submit="saveExchangeStuff();">
+							<div class="modal-body">
+								<input type="text" class="form-control" placeholder="资源名称"
+									required="required" ng-model="newExchangeStuff.title"><br>
+								<div>
+									<textarea cols="60" rows="3" placeholder="简要描述"
+										class="form-control" ng-model="newExchangeStuff.description"
+										maxlength="500"></textarea>
+								</div>
+								<br> <input type="text"
+									placeholder="期望交换的资源名称（如：图书，球拍，衣服等等）" class="form-control"
+									ng-model="newExchangeStuff.expectation"><br>
+								<div class="form-group">
+									<label class="pull-left">资源图片：</label> <input type="file"
+										class="pull-left" ng-file-select="onFileSelect($files)"
+										multiple="multiple" accept="image/*">
+									<!-- 						<div ng-file-drop="onFileSelect($files)" -->
+									<!-- 							ng-file-drag-over-class="optional-css-class-name-or-function" -->
+									<!-- 							ng-show="dropSupported">drop files here</div> -->
+									<!-- 						<div ng-file-drop-available="dropSupported=true" -->
+									<!-- 							ng-show="!dropSupported">HTML5 Drop File is not supported!</div> -->
+									<!-- 						<button class="button button-pill" ng-click="upload.abort()">取消</button> -->
+									<label style="color:green;">{{progress}}</label> <br>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="button button-pill"
+										ng-click="$hide();">取消</button>
+									<button type="submit" class="button button-action button-pill">发表</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div id="chooseEs" class="tab-pane" style="overflow:auto;">
+						<ul>
+							<li class="stuff" ng-mouseover="showCheck($index);" ng-class="{bgGray:$index==checkNum}" ng-repeat="es in userExchangeStuffs track by es.id"><a target="_blank" ui-sref="exchangeStuff({id:es.id})">{{es.title}}</a><i ng-show="$index==checkNum" class="pull-right fa fa-check pointer" ng-click="checkExchangeStuff(es,$index);"></i></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

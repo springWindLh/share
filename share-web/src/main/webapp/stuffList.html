@@ -1,0 +1,49 @@
+<div class="col-sm-3" style="background-image: url(sources/img/system/stuffList.jpg);background-size:100% 100%; background-repeat:no-repeat; height:100%;position: fixed;">	
+<div class="bottom_block">
+<p class="bold size40">分享列表</p>
+<p class="size26 bold500">挑选资源，收获惊喜</p>
+</div>
+</div>
+<div class="col-sm-offset-3 col-sm-9 stuff">
+<div id="stuffsEmptyShow" class="size20 margin-top50 margin-bottom20 margin-left50" style="display: none;"><i class="fa fa-globe margin-right10"></i>哇喔，这里居然还是一片未开垦的领土<br><br>
+<i class="fa fa-street-view margin-right10"></i>赶快注册成为{{currentSchoolname}}的第一位开辟者<br><br><i class="fa fa-fire margin-right10"></i>发布你的第一份宝贵资源，点燃分享接力的火源</div>
+
+<hr style="margin-top: 0;">
+	<div class="margin-left20 col-sm-9" ng-repeat="stuff in stuffs track by stuff.id">
+		<a ui-sref="stuff({id:stuff.id})" target="_blank">
+			<div class="pull-left">
+			<image-show class="width150 height150" imgurl="{{stuff.attachments[0].path}}" imgtype="stuff" defaultimageurl="{{baseSystemImgUrl}}default_stuffImg.jpg">
+					</image-show>
+				<p class="center margin-top10">
+					分享价：<strong ng-if="!stuff.free" style="color: red;font-size: 16px;">{{stuff.price|currency:"￥"}}</strong>
+					<strong ng-if="stuff.free" style="color:gray">免费</strong>
+				</p>
+			</div>
+		</a>
+		<div class="pull-left margin-left10 col-sm-8">
+			<div class="height40"><a target="_blank" ui-sref="stuff({id:stuff.id})">
+					<strong class="size22">{{stuff.title|lengthFilter:17}}</strong></a>
+				<image-show
+					class="headImg pull-right width40 height40 borderRadius50"
+					imgurl="{{stuff.user.headImg.path}}" imgtype="headImg"
+					defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg"
+					data-template="sources/template/headImg_popover.html"
+					data-animation="am-flip-x" data-placement="bottom"
+					data-trigger="hover" ng-mouseenter="getUserStuffs(stuff.user.id);"
+					bs-popover="headImg_popover"> </image-show>
+			</div>
+				<a target="_blank" ui-sref="stuff({id:stuff.id})"><p class="height100 size14">{{stuff.description}}</p></a>
+			<div class="height20" style="margin-top: 21px;color:#939292;">
+				<span class="pull-left">{{stuff.createTime|dateFilter}}</span>
+				<span
+					class="margin-left20 pull-left"><i class="fa fa-comment margin-right10"></i>{{stuff.comments.length}}</span>
+					<span ng-if="!currentUserId>0"
+					class="margin-left20 pull-left">{{stuff.school.schoolname}}</span>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<hr>
+	</div>
+	<button class="button button-pill col-sm-5" ng-if="stuffs.length>=20" ng-click="showMore();">查看更多</button>
+</div>

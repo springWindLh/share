@@ -1,0 +1,14 @@
+<div class="popover" style="min-width:500px;max-width: 600px;">
+	<div class="arrow"></div>
+	<form name="commentForm" ng-submit="save_comment(newComment,stuff)">
+		<div class="popover-content">
+			<div>
+				<textarea cols="60" rows="3"
+					class="form-control" placeholder="内容" ng-model="newComment.content"
+					maxlength="500" required="required"></textarea>
+			</div>
+			<br>
+			<button type="submit" class="button button-action button-pill">回复</button>
+		</div>
+	</form>
+</div>

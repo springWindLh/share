@@ -1,0 +1,14 @@
+<div class="popover" style="max-width:500px;">
+	<div class="arrow"></div>
+	<div class="popover-title">回复：{{comment.user.name}}</div>
+	<form name="replyForm" ng-submit="save_reply(newReply,comment);">
+		<div class="popover-content">
+			<div>
+				<textarea cols="60" rows="3" placeholder="内容"
+					ng-model="newReply.content" maxlength="500" required="required"></textarea>
+			</div>
+			<br>
+			<button type="submit" class="button button-action button-pill">回复</button>
+		</div>
+	</form>
+</div>

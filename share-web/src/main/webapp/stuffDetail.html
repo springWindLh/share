@@ -1,0 +1,119 @@
+<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a><a href="#"
+		class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#"
+		class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#"
+		class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#"
+		class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#"
+		class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+</div>
+<div class="width700 toCenter">
+	<h2>{{stuff.title}}</h2>
+	<p>
+		<a ui-sref="user({id:stuff.user.id})" target="_blank"> <image-show
+				class="width40 height40 borderRadius50"
+				imgurl="{{stuff.user.headImg.path}}" imgtype="headImg"
+				defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg">
+			</image-show></a><small><span class="margin-left10">时间：{{stuff.createTime|dateFilter}}</span><span
+			class="margin-left20">作者：{{stuff.user.name}}</span><span
+			class="margin-left20">tel：</span></small>{{stuff.user.phone}} <small><span
+			class="margin-left20">状态：</span></small><span> <strong
+			ng-if="stuff.completed" class="text-danger">分享结束</strong> <strong
+			ng-if="!stuff.completed" class="text-success">分享中...</strong>
+		</span>
+		<button class="margin-left20 button button-royal button-small"
+			ng-if="stuff.user.id!=currentUserId" ng-click="messageModal();">
+			发信息给<span ng-if="stuff.user.sex=='男'">他</span><span
+				ng-if="stuff.user.sex=='女'">她</span>
+		</button>
+	</p>
+	<p>{{stuff.description}}</p>
+
+	<a ng-repeat="attachment in stuff.attachments" class="fancybox"
+		data-fancybox-group="gallery"
+		ng-href="{{baseAttachmentImgUrl}}{{attachment.path}}"><img
+		class="imgBorder" ng-src="{{baseAttachmentImgUrl}}{{attachment.path}}"></a>
+
+	<div class="center">
+		<br>
+		<button ng-if="!currentUserId>0" ng-click="showLoginModal();"
+			class="button button-primary button-pill">回复</button>
+		<button ng-if="currentUserId>0"
+			class="button button-primary button-pill" data-auto-close="true"
+			data-placement="bottom" data-animation="am-fade-and-scale"
+			data-template="sources/template/comment_popover.html" bs-popover>回复</button>
+	</div>
+	<div>
+		<div ng-repeat="comment in comments">
+			<div>
+				<hr>
+				<div class="pull-left">
+					<a ui-sref="user({id:comment.user.id})" target="_blank"> <image-show
+							class="width40 height40 borderRadius50"
+							imgurl="{{comment.user.headImg.path}}" imgtype="headImg"
+							defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg">
+						</image-show></a>
+				</div>
+				<div class="pull-left margin-left10">
+					<div>
+						<a ui-sref="user({id:comment.user.id})" target="_blank"><label
+							class="pointer">{{comment.user.name}}</label></a><span
+							class="margin-left10">{{comment.createTime|dateFilter}}</span> <span
+							ng-if="!currentUserId>0" ng-click="showLoginModal();"><i
+							class="fa fa-comment margin-left10 pointer"></i></span> <span
+							ng-if="currentUserId>0&&comment.user.id!=currentUserId"
+							data-auto-close="true" data-animation="am-flip-x"
+							data-template="sources/template/reply_popover.html" bs-popover><i
+							class="fa fa-comment margin-left10 pointer"></i></span> <span
+							ng-if="comment.user.id==currentUserId"><i
+							class="fa fa-trash margin-left10 pointer"
+							ng-click="deleteComment(comment.id,$index)"></i></span>
+					</div>
+					<p>{{comment.content}}</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="margin-left50" ng-repeat="reply in comment.replies">
+				<hr style="border-style: dashed;">
+				<div class="pull-left">
+					<a ui-sref="user({id:reply.author.id})" target="_blank"><image-show
+							class="width30 height30 borderRadius50"
+							imgurl="{{reply.author.headImg.path}}" imgtype="headImg"
+							defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg">
+						</image-show></a>
+
+				</div>
+				<div class="pull-left margin-left10">
+					<div>
+						<label><a ui-sref="user({id:reply.author.id})"
+							target="_blank">{{reply.author.name}}</a>回复：{{reply.replyer.name}}</label><span
+							class="margin-left10">{{reply.createTime|dateFilter}}</span> <span
+							ng-if="reply.author.id!=currentUserId" data-auto-close="true"
+							data-animation="am-flip-x"
+							data-template="sources/template/reply_popover.html" bs-popover><i
+							class="fa fa-comment margin-left10 pointer"></i></span> <span
+							ng-if="reply.author.id==currentUserId"><i
+							class="fa fa-trash margin-left10 pointer"
+							ng-click="deleteReply(comment,reply.id,$index)"></i></span>
+					</div>
+					<p>{{reply.content}}</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="pagesize>0">
+		<page-navigation pagesize="pagesize"></page-navigation>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$(".fancybox").fancybox({
+			helpers : {
+				thumbs : {
+					width : 20,
+					height : 20
+				}
+			}
+		});
+	});
+</script>

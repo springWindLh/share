@@ -1,0 +1,43 @@
+<div class="col-sm-10 paddingNone" id="stuffSquare_main">
+	<div class="clearfix"
+		style="position: fixed;z-index: 99;height: 60px;width:100%;background-color: white;padding: 10px;box-shadow:0px 0px 10px black;">
+		<button class="btn btn-default pull-left margin-left20" ng-class="{btnSelected:btnNum==-1}"
+			ng-click="find(null,-1);">全部</button>
+		<button class="btn btn-default pull-left margin-left20" ng-class="{btnSelected:btnNum==$index}"
+			ng-repeat="type in types" ng-click="find(type.id,$index);">{{type.name}}</button>
+		<input class="form-control pull-left width200 margin-left20" ng-model="searchKey" placeholder="搜索标题">
+		<button class="margin-left20 button button-pill"
+					ng-click="search();">
+					<i class="fa fa-search"></i>
+				</button>
+	</div>
+	<div style="margin-top: 70px;">
+		<div class="col-sm-3" ng-repeat="stuff in stuffs track by stuff.id">
+			<div class="thumbnail" style="height:368px;">
+				<image-show style="height:200px;"
+					imgurl="{{stuff.attachments[0].path}}" imgtype="stuff"
+					defaultimageurl="{{baseSystemImgUrl}}default_stuffImg.jpg">
+				</image-show>
+				<div class="caption">
+					<p class="size22">{{stuff.title|lengthFilter:9}}</p>
+					<p>
+						{{stuff.user.name}}<span class="margin-left10 focus_info">{{stuff.user.phone}}</span>
+					</p>
+					<p>
+						<span>{{stuff.createTime|dateFilter}}</span> <span
+							class="margin10"><strong ng-if="!stuff.free"
+							style="color: red;font-size: 16px;">{{stuff.price|currency:"￥"}}</strong>
+							<strong ng-if="stuff.free" class="colorGray">免费</strong></span>
+					</p>
+					<p>
+						<a class="button btn-block" ui-sref="stuff({id:stuff.id})"
+							target="_blank">详情</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<button class="button button-pill col-sm-5 btn-block"
+			ng-if="stuffs.length>=50" ng-click="showMore();">查看更多</button>
+	</div>
+</div>

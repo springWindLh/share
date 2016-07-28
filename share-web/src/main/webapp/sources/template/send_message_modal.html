@@ -1,0 +1,25 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-label="Close"
+					ng-click="$hide()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					发送信息给：<strong>{{acceptName}}</strong>
+				</h4>
+			</div>
+			<form name="messageForm" ng-submit="sendMessage();">
+			<div class="modal-body">
+				<textarea rows="3" cols="50" class="form-control" placeholder="内容" ng-model="newMessage.content"
+					required="required" maxlength="500"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="button" ng-click="$hide()">取消</button>
+				<button type="submit" class="button button-royal">发送</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,107 @@
+<div class="margin20 col-sm-10">
+	<ul class="nav nav-tabs">
+		<li class="active" role="presentation"><a href="#share"
+			data-toggle="tab">分享区</a></li>
+		<li role="presentation"><a href="#exchange" data-toggle="tab">交换区</a></li>
+	</ul>
+	<div class="tab-content margin10">
+		<div id="share" class="tab-pane active">
+			<div class="col-sm-6">
+				<input class="form-control" ng-model="searchKey" placeholder="搜索标题">
+			</div>
+			<div class="col-sm-6">
+				<button class="margin-left20 button button-pill"
+					ng-click="search(searchKey);">
+					<i class="fa fa-search"></i>
+				</button>
+				<button class="button button-primary pull-right"
+					ng-show="hasSelected" ng-click="deleteStuffs();">删除选中项</button>
+				<button class="button pull-right" ng-show="hasSelected"
+					ng-click="cancelAllSelected();">取消</button>
+			</div>
+			<div class="clearfix"></div>
+
+			<table ng-table="tableParams"
+				template-pagination="sources/template/customer_page.html"
+				class="table table-hover headerLeft">
+				<tbody ng-repeat="group in $groups">
+					<tr class="ng-table-group">
+						<td colspan="{{$columns.length}}"><a href=""
+							ng-click="group.$hideRows = !group.$hideRows"> <span
+								ng-class="{ 'fa fa-chevron-right': group.$hideRows, 'fa fa-chevron-down': !group.$hideRows }"></span>
+								<strong ng-if="group.value">免费</strong> <strong
+								ng-if="!group.value">付费</strong>
+						</a></td>
+					</tr>
+					<tr ng-hide="group.$hideRows" ng-repeat="stuff in group.data">
+						<td width="30" style="text-align: left"
+							header="'sources/template/header_checkbox.html'"><input class="pointer"
+							type="checkbox" ng-model="checkboxes.items[stuff.id]" /></td>
+						<td data-title="'编号'">{{$index+1}}</td>
+						<td data-title="'标题'" sortable="'title'"><a
+							ui-sref="stuff({id:stuff.id})">{{stuff.title}}</a></td>
+						<td data-title="'类型'" sortable="'type.name'">{{stuff.type.name}}</td>
+						<td data-title="'时间'" sortable="'createTime'">{{stuff.createTime}}</td>
+						<td data-title="'状态'" sortable="'completed'"><strong
+							ng-if="stuff.completed" class="text-danger">分享结束</strong> <strong
+							ng-if="!stuff.completed" class="text-success">分享中...</strong></td>
+						<td data-title="'操作'"><button
+								class="button button-small button-caution"
+								ng-if="!stuff.completed" ng-click="overShare(stuff);">结束分享</button>
+							<button class="button button-small" style="color:#666666;"
+								ng-if="stuff.completed" ng-click="recoverShare(stuff);">重新分享</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<!-- 交换区 -->
+		<div id="exchange" class="tab-pane">
+			<div class="col-sm-6">
+				<input class="form-control" ng-model="es_searchKey" placeholder="搜索标题">
+			</div>
+			<div class="col-sm-6">
+				<button class="margin-left20 button button-pill"
+					ng-click="es_search(es_searchKey);">
+					<i class="fa fa-search"></i>
+				</button>
+				<button class="button button-primary pull-right"
+					ng-show="es_hasSelected" ng-click="deleteExchangeStuffs();">删除选中项</button>
+				<button class="button pull-right" ng-show="es_hasSelected"
+					ng-click="es_cancelAllSelected();">取消</button>
+			</div>
+			<div class="clearfix"></div>
+
+			<table ng-table="es_tableParams"
+				template-pagination="sources/template/customer_page.html"
+				class="table table-hover headerLeft">
+				<tbody ng-repeat="group in $groups">
+					<tr class="ng-table-group">
+						<td colspan="{{$columns.length}}"><a href=""
+							ng-click="group.$hideRows = !group.$hideRows"> <span
+								ng-class="{ 'fa fa-chevron-right': group.$hideRows, 'fa fa-chevron-down': !group.$hideRows }"></span>
+								<strong ng-if="!group.value">进行中</strong> <strong
+								ng-if="group.value">已结束</strong>
+						</a></td>
+					</tr>
+					<tr ng-hide="group.$hideRows" ng-repeat="es in group.data">
+						<td width="30" style="text-align: left"
+							header="'sources/template/header_checkbox_es.html'"><input class="pointer"
+							type="checkbox" ng-model="es_checkboxes.items[es.id]" /></td>
+						<td data-title="'编号'">{{$index+1}}</td>
+						<td data-title="'标题'" sortable="'title'"><a
+							ui-sref="exchangeStuff({id:es.id})">{{es.title}}</a></td>
+						<td data-title="'期望值'">{{es.expectation}}</td>
+						<td data-title="'时间'" sortable="'createTime'">{{es.createTime}}</td>
+						<td data-title="'操作'"><button
+								class="button button-small button-caution"
+								ng-if="!es.completed" ng-click="es_overShare(es);">结束分享</button>
+							<button class="button button-small" style="color:#666666;"
+								ng-if="es.completed" ng-click="es_recoverShare(es);">重新分享</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>

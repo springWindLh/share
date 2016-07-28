@@ -1,0 +1,77 @@
+<div class="col-sm-3" style="margin-top:50px;position: fixed;">
+	<div class="center">
+		<div>
+		<image-show class="headImg width100 height100 borderRadius50 margin10" imgurl="{{user.headImg.path}}" imgtype="headImg" defaultimageurl="{{baseSystemImgUrl}}default_headImg.jpg">
+					</image-show>
+		</div>
+		<p class="colorGray"
+			ng-if="user.signature!=''&&user.signature!=undefined">个性签名：{{user.signature}}</p>
+		<p class="colorGray">
+			email:<span class="focus_info">{{user.email}}</span>
+		</p>
+		<p class="colorGray">
+			tel:<span class="focus_info">{{user.phone}}</span>
+		</p>
+		<p class="colorGray">
+			共分享了&nbsp;<span class="focus_num">{{total}}</span>&nbsp;个资源
+		</p>
+	</div>
+</div>
+<div class="col-sm-9 col-sm-offset-3" style="box-shadow:-3px 0 5px gray;min-height:100%;">
+	<ul class="nav nav-tabs">
+		<li class="active" role="presentation"><a href="#userWay"
+			data-toggle="tab">成长足迹</a></li>
+		<li role="presentation"><a href="#newStuff" data-toggle="tab">更多分享</a></li>
+	</ul>
+	<div class="tab-content margin10">
+		<div id="userWay" class="tab-pane active">
+			<div class="grow_div">
+			<div class="grow_circle"></div>
+				<p><span class="focus_info">{{user.name}}</span>注册成为校园资源分享平台会员</p>
+				<p>{{user.createTime}}</p>
+			</div>
+			<div class="grow_div" ng-repeat="stuff in stuffs|limitTo:5">
+			<div class="grow_circle"></div>
+			<p><span class="focus_info">{{user.name}}</span>分享了<a ui-sref="stuff({id:stuff.id})" target="_blank"><strong>{{stuff.title}}</strong></a></p>
+			<p>{{stuff.createTime}}</p>
+			</div>
+			<div class="grow_div">
+			<div class="grow_circle"></div>
+				<p><span class="focus_info">{{user.name}}</span>最后一次登录</p>
+				<p>{{user.lastLoginTime}}</p>
+			</div>
+		</div>
+		<div id="newStuff" class="tab-pane stuff">
+			<div ng-repeat="stuff in stuffs track by stuff.id">
+				<a ui-sref="stuff({id:stuff.id})" target="_blank">
+					<div class="pull-left">
+						<img
+							ng-src="{{baseAttachmentImgUrl}}{{stuff.attachments[0].path}}"
+							class="width150 height150">
+						<p class="center margin-top10">
+							分享价：<strong ng-if="!stuff.free"
+								style="color: red;font-size: 16px;">{{stuff.price|currency:"￥"}}</strong>
+							<strong ng-if="stuff.free" style="color:gray">免费</strong>
+						</p>
+					</div>
+				</a>
+				<div class="pull-left margin-left10 minWidth400">
+					<div class="height40">
+						<a target="_blank" ui-sref="stuff({id:stuff.id})"> <strong
+							class="size26">{{stuff.title}}</strong></a>
+					</div>
+					<a target="_blank" ui-sref="stuff({id:stuff.id})"><p
+							class="height100">{{stuff.description}}</p></a>
+					<div class="height20" style="margin-top: 21px;">
+						<span class="pull-left">{{stuff.createTime}}</span><span
+							class="margin-left20 pull-left"><i class="fa fa-comment"></i></span>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<hr>
+			</div>
+			<button class="button button-pill col-sm-5" ng-if="stuffs.length>=20" ng-click="showMore();">查看更多</button>
+		</div>
+	</div>
+</div>

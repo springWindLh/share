@@ -1,0 +1,65 @@
+angular.module("shareApp")
+.controller("stuffSquare_controller",function($rootScope,$scope,$http,stuffService,typeService){
+	$scope.currentStuffPage=1;
+	$scope.stuffs=[];
+	$scope.query=null;
+	$scope.searchKey='';
+	$scope.getStuffs=function(){
+		if(($scope.count==0||$scope.count<=50)&&$scope.currentStuffPage!=1){
+			alert("没有更多了！");
+			return;
+		}
+		stuffService.query({
+			_page:$scope.currentStuffPage,
+			_count:50,
+			_query:$scope.query
+		},function(response){
+			$scope.count=response.stuffs.length;
+			$scope.stuffs=$scope.stuffs.concat(response.stuffs);
+		});
+	};
+	typeService.query({
+		_count:999
+	},function(response){
+		$scope.types=response.types;
+	});
+	$scope.getStuffs($scope.query);
+	
+	$scope.find=function(typeId,index){
+		$scope.searchKey='';
+		$scope.btnNum=index;
+		$scope.query=typeId?'type.id,'+typeId:'';
+		$scope.currentStuffPage=1;
+		$scope.stuffs=[];
+		$scope.getStuffs();
+	};
+	
+	$scope.showMore=function(){
+		$scope.currentStuffPage+=1;
+		if($scope.searchKey==''){
+			$scope.getStuffs();
+		}else{
+			$scope.getStuffsByKeyWords();
+		}
+		};
+		$scope.getStuffsByKeyWords=function(){
+			if(($scope.count==0||$scope.count<=50)&&$scope.currentStuffPage!=1){
+				alert("没有更多了！");
+				return;
+			}
+			$http.get('stuff/search.json',{params:{
+				_page:$scope.currentStuffPage,
+				_count:50,
+				keyWords:$scope.searchKey}
+			}).success(function(response){
+					$scope.count=response.stuffs.length;
+					$scope.stuffs=$scope.stuffs.concat(response.stuffs);
+			});
+		};
+		$scope.search=function(){
+			$scope.btnNum=-2;
+			$scope.currentStuffPage=1;
+			$scope.stuffs=[];
+			$scope.getStuffsByKeyWords();
+		};
+});
