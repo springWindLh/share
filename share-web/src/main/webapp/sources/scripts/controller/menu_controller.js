@@ -80,14 +80,16 @@ $scope.saveUser=function(newUser){
 		$scope.provinceVisble=true;
 		 $scope.schoolVisble=false;
 		 $scope.reloadVisble=reloadVisble;
-		 var myOtherModal = $modal({
-			 scope: $scope, 
-			 template: 'sources/template/select_school_modal.html',
-	         show : true
-			 });
-		  $scope.hideModal = function() {
-		    myOtherModal.$promise.then(myOtherModal.hide);
-		  };
+		 // var myOtherModal = $modal({
+			//  scope: $scope,
+			//  template: 'sources/template/select_school_modal.html',
+	      //    show : true
+			//  });
+		 //  $scope.hideModal = function() {
+		 //    myOtherModal.$promise.then(myOtherModal.hide);
+		 //  };
+		$('#placeModal').modal('show');
+
 
 		function getProvinces(){
 			$http.get('school/list/provinces').success(
@@ -124,6 +126,9 @@ $scope.saveUser=function(newUser){
 		};
 	};
 
+	$scope.closePlaceModal = function () {
+		$('#placeModal').modal('hide')
+	};
 
 	$scope.updateSchoolInfo=function(){
 		if(angular.isUndefined($rootScope.schoolid)){
