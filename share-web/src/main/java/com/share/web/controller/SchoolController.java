@@ -1,15 +1,14 @@
 package com.share.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.share.web.entity.School;
 import com.share.web.service.ISchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,6 +21,9 @@ import java.util.Map;
 @Scope("prototype")
 @RequestMapping("/school")
 public class SchoolController extends BaseController {
+
+    private static final String SCHOOLS_URL = "http://data.api.gkcx.eol.cn/soudaxue/queryschool.html?messtype=jsonp";
+
     @Autowired
     private ISchoolService schoolService;
 
@@ -40,6 +42,45 @@ public class SchoolController extends BaseController {
             e.printStackTrace();
         }
         return modelAndView(false);
+    }
+
+    @RequestMapping(value = "init/schools", method = RequestMethod.GET)
+    @ResponseBody
+    public String initSchools() {
+        int page = 0, size = 50;
+        List<School> schools;
+        do {
+            page++;
+            schools = this.getRemoteSchools("普通本科", page, size);
+            if (schools != null) {
+                for (School school : schools) {
+                    schoolService.save(school);
+                }
+            }
+        } while (schools != null);
+        page = 0;
+        do {
+            page++;
+            schools = this.getRemoteSchools("独立学院", page, size);
+            if (schools != null) {
+                for (School school : schools) {
+                    if (school != null){
+                        schoolService.save(school);
+                    }
+                }
+            }
+        } while (schools != null);
+        return "学校数据初始化完成";
+    }
+
+    private List<School> getRemoteSchools(String schooltype, int page, int size) {
+        String url = SCHOOLS_URL + "&schooltype=" + schooltype + "&page=" + page + "&size=" + size;
+        RestTemplate restTemplate = new RestTemplate();
+        String response = restTemplate.getForObject(url, String.class);
+        response = response.replaceFirst("null\\(", "");
+        response = response.substring(0, response.lastIndexOf(");"));
+        List<School> schools = JSON.parseArray(JSON.parseObject(response).getString("school"), School.class);
+        return schools;
     }
 
     @RequestMapping(value = "list/provinces", method = RequestMethod.GET)

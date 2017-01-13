@@ -26,12 +26,11 @@ public class School implements Serializable {
 	private String jianjie;
 	private String schoolcode;
 	private Integer ranking;
-	private String guanwang;
 	private String oldname;
 
 	public School(Integer schoolid, String schoolname, String province, String schooltype, String schoolproperty,
 			Boolean edudirctyly, Boolean f985, Boolean f211, String level, String membership, String schoolnature,
-			String shoufei, String jianjie, String schoolcode, Integer ranking, String guanwang, String oldname) {
+			String shoufei, String jianjie, String schoolcode, Integer ranking, String oldname) {
 		this.schoolid = schoolid;
 		this.schoolname = schoolname;
 		this.province = province;
@@ -47,7 +46,6 @@ public class School implements Serializable {
 		this.jianjie = jianjie;
 		this.schoolcode = schoolcode;
 		this.ranking = ranking;
-		this.guanwang = guanwang;
 		this.oldname = oldname;
 	}
 
@@ -196,15 +194,6 @@ public class School implements Serializable {
 
 	public void setRanking(Integer ranking) {
 		this.ranking = ranking;
-	}
-
-	@Column(name = "guanwang", length = 50)
-	public String getGuanwang() {
-		return guanwang;
-	}
-
-	public void setGuanwang(String guanwang) {
-		this.guanwang = guanwang;
 	}
 
 	@Column(name = "oldname", length = 50)
